@@ -24,7 +24,7 @@ d.text("This is my image " + image_path + ":\n")
 d.image(image_path, impl="bitImageColumn")
 d.print_and_feed(5) # Push the paper out
 
-os.makedirs("./tmp", exist_ok=False)
+os.makedirs("./tmp", exist_ok=True)
 with open("./tmp/output", "wb") as f:
     f.write(d.output)
     print("Dumped output to ./tmp/output")
