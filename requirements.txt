@@ -1,1 +1,1 @@
-python-escpos ~= 2.2.0 # Thermal printing library
+python-escpos == 3.0a8 # Thermal printing library

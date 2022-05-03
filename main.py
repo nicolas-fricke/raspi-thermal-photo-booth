@@ -1,6 +1,7 @@
-from argparse import ArgumentError
 import sys
-from escpos.printer import Serial
+import os
+import time
+from escpos.printer import Serial, Dummy
 
 if (len(sys.argv) != 2):
     print("Please provide the path to the image to print")
@@ -17,7 +18,19 @@ p = Serial(devfile='/dev/cu.usbserial-0001',
            timeout=0.05,
            dsrdtr=False)
 
+d = Dummy()
 
-p.text("This is my image " + image_path + ":\n")
-p.image(image_path, impl="bitImageColumn")
-p.text("\n\n\n\n\n") # Push the paper out
+d.text("This is my image " + image_path + ":\n")
+d.image(image_path, impl="bitImageColumn")
+d.print_and_feed(5) # Push the paper out
+
+os.makedirs("./tmp", exist_ok=False)
+with open("./tmp/output", "wb") as f:
+    f.write(d.output)
+    print("Dumped output to ./tmp/output")
+
+print("Printing...")
+
+p._raw(d.output)
+
+time.sleep(10) # To ensure the print job is done

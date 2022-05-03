@@ -1,9 +1,12 @@
 appdirs==1.4.4
 argcomplete==2.0.0
+future==0.18.2
 Pillow==9.1.0
 pyserial==3.5
-python-escpos==2.2.0
+python-barcode==0.13.1
+python-escpos==3.0a8
 pyusb==1.2.1
 PyYAML==6.0
 qrcode==7.3.1
 six==1.16.0
+viivakoodi==0.8.0
