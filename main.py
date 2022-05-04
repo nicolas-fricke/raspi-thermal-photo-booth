@@ -1,35 +1,6 @@
 import sys
-import os
-import time
-from escpos.printer import Serial, Dummy
 from image import load_resize_and_save
-
-
-def print_image(image_path):
-    p = Serial(devfile='/dev/cu.usbserial-0001',
-               baudrate=9600,
-               bytesize=8,
-               parity='N',
-               stopbits=1,
-               timeout=0.05,
-               dsrdtr=False)
-
-    d = Dummy()
-
-    d.text("This is my image " + image_path + ":\n")
-    d.image(image_path, impl="bitImageColumn")
-    d.print_and_feed(5)  # Push the paper out
-
-    os.makedirs("./tmp", exist_ok=True)
-    with open("./tmp/output", "wb") as f:
-        f.write(d.output)
-        print("Dumped output to ./tmp/output")
-
-    print("Printing...")
-
-    p._raw(d.output)
-    time.sleep(10)  # To ensure the print job is done before quitting
-    p.close()
+from printer import print_image
 
 
 if __name__ == '__main__':
@@ -45,6 +16,6 @@ if __name__ == '__main__':
 
     print("Printing " + resized_image_path)
 
-    print_image(resized_image_path)
+    print_image(resized_image_path, "/dev/cu.usbserial-0001")
 
     print("Done.")
