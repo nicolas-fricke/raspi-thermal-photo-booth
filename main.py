@@ -16,6 +16,6 @@ if __name__ == '__main__':
 
     print("Printing " + resized_image_path)
 
-    print_image(resized_image_path, "/dev/cu.usbserial-0001")
+    print_image(resized_image_path, "/dev/serial0")
 
     print("Done.")
