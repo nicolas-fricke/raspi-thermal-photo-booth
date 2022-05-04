@@ -1,2 +1,3 @@
 python-escpos == 3.0a8 # Thermal printing library
 opencv-python ~= 4.5.5
+picamera ~= 1.13
