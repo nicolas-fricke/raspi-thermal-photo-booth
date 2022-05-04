@@ -2,6 +2,7 @@ import sys
 import os
 import time
 from escpos.printer import Serial, Dummy
+from image import load_resize_and_save
 
 
 def print_image(image_path):
@@ -37,6 +38,13 @@ if __name__ == '__main__':
         sys.exit(1)
 
     image_path = sys.argv[1]
-    print("Printing " + image_path)
 
-    print_image(image_path)
+    print("Resizing " + image_path)
+    resized_image_path = load_resize_and_save(image_path)
+    print("Saved resized image to " + resized_image_path)
+
+    print("Printing " + resized_image_path)
+
+    print_image(resized_image_path)
+
+    print("Done.")

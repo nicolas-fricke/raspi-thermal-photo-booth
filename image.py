@@ -32,6 +32,12 @@ def save_image(image):
     return file_path
 
 
+def load_resize_and_save(image_path):
+    image = load_image(image_path)
+    resized_image = resize(image)
+    return save_image(resized_image)
+
+
 if __name__ == '__main__':
     if (len(sys.argv) != 2):
         print("Please provide the path to the image to print")
