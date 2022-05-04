@@ -1,5 +1,6 @@
 import cv2
 import sys
+import os
 
 
 def load_image(image_path):
@@ -23,6 +24,14 @@ def resize(image):
     return cv2.resize(image, (target_width, target_height))
 
 
+def save_image(image):
+    os.makedirs("./tmp", exist_ok=True)
+    file_path = "./tmp/image.png"
+    cv2.imwrite(file_path, image)
+
+    return file_path
+
+
 if __name__ == '__main__':
     if (len(sys.argv) != 2):
         print("Please provide the path to the image to print")
@@ -36,3 +45,4 @@ if __name__ == '__main__':
     print_image(image)
     image_resized = resize(image)
     print_image(image_resized)
+    print("Resized image saved to: " + save_image(image_resized))
