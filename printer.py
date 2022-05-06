@@ -1,5 +1,5 @@
 import time
-from escpos.printer import Serial, Dummy
+from escpos.printer import Serial
 
 
 def print_image(image_path, device_path):
@@ -11,14 +11,9 @@ def print_image(image_path, device_path):
                timeout=0.05,
                dsrdtr=False)
 
-    # The documentation recommended to first output the image to a
-    # dummy printer to improve print speed & quality and then feed
-    # the raw data to the serial printer port
-    d = Dummy()
-
-    d.image(image_path, impl="bitImageColumn")
-    d.print_and_feed(5)  # Push the paper out
-
-    p._raw(d.output)
-    time.sleep(10)  # To ensure the print job is done before quitting
+    p.image(image_path, impl="bitImageColumn")
+    # p._raw(d.output)
+    time.sleep(1)  # To ensure the print job is done before quitting
+    p.print_and_feed(3)  # Push the paper out
+    time.sleep(1)  # To ensure the print job is done before quitting
     p.close()
